@@ -1,0 +1,58 @@
+lightning-button {
+   margin: 10px;
+}
+
+lightning-combobox {
+   width: 70px;
+}
+
+.search-bar {
+   width: 300px;
+   margin-bottom: 10px;
+}
+
+.pagination-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.page-size-selector {
+   display: flex;
+   align-items: center;
+}
+
+.total-count {
+   margin-left: 10px;
+   font-size: 1rem;
+   font-style: italic;
+}
+
+.pagination-controls {
+   display: flex;
+   align-items: center;
+}
+
+.pagination-controls .active-page {
+   font-weight: bold;
+   border-bottom: 2px solid blue;
+}
+
+.pagination-controls lightning-button-icon {
+   margin: 0 5px;
+}
+
+.pagination-controls lightning-button {
+   margin: 0 2px;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.pagination-controls {
+  margin: 0 0.5rem;
+}

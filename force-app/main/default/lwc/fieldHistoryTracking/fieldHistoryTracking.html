@@ -1,0 +1,112 @@
+<template>
+  <lightning-card title="Field History Tracking">
+    <lightning-button
+      label="+ Select Object"
+      variant="brand"
+      onclick={openModal}
+    >
+    </lightning-button>
+
+    <template if:true={isModalOpen}>
+      <section
+        role="dialog"
+        tabindex="-1"
+        class="slds-modal slds-fade-in-open"
+        style="width: 100%"
+      >
+        <div class="slds-modal__container" style="max-width: 100%">
+          <header class="slds-modal__header"></header>
+          <div class="slds-modal__content slds-p-around_medium">
+            <lightning-input
+              class="search-bar"
+              placeholder="Search..."
+              onchange={handleSearch}
+            >
+            </lightning-input>
+
+            <template if:true={filteredObjects.length}>
+              <table
+                class="slds-table slds-table_bordered slds-table_cell-buffer slds-max-medium-table_stacked-horizontal"
+              >
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Object Name</th>
+                    <th>Label</th>
+                    <th>ID Prefix</th>
+                    <th>Object Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template for:each={filteredObjects} for:item="object">
+                    <tr key={object.apiName}>
+                      <td>
+                        <lightning-input
+                          type="checkbox"
+                          value={object.apiName}
+                          name={object.apiName}
+                          onchange={handleCheckboxChange}
+                        >
+                        </lightning-input>
+                      </td>
+                      <td>{object.apiName}</td>
+                      <td>{object.label}</td>
+                      <td>{object.idPrefix}</td>
+                      <td>{object.objectType}</td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </template>
+            <template if:false={filteredObjects.length}>
+              <p>No objects found.</p>
+            </template>
+
+            <template if:true={isNoObjects}>
+              <p>No objects found.</p>
+            </template>
+          </div>
+
+          <footer class="slds-modal__footer">
+            <div class="slds-grid slds-wrap">
+              <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox
+                  label="Page Size"
+                  value={pageSize}
+                  options={pageSizeOptions}
+                  onchange={handlePageSizeChange}
+                >
+                </lightning-combobox>
+              </div>
+
+              <div class="slds-col slds-size_1-of-2 slds-text-align_right">
+                <div class="pagination-controls">
+                  <lightning-button
+                    label="Previous"
+                    onclick={handlePreviousPage}
+                    disabled={isFirstPage}
+                  >
+                  </lightning-button>
+
+                  <lightning-button
+                    label="Next"
+                    onclick={handleNextPage}
+                    disabled={isLastPage}
+                  >
+                  </lightning-button>
+                </div>
+              </div>
+            </div>
+
+            <lightning-button label="Cancel" onclick={closeModal}>
+            </lightning-button>
+            <lightning-button label="Save" variant="brand" onclick={handleSave}>
+            </lightning-button>
+          </footer>
+        </div>
+      </section>
+
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </lightning-card>
+</template>
